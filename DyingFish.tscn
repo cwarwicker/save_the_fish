@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6ttcpra5q7h8"]
+
+[ext_resource type="Script" path="res://Draggable.gd" id="1_mdf8m"]
+[ext_resource type="Script" path="res://DyingFish.gd" id="1_svc5y"]
+[ext_resource type="Texture2D" uid="uid://dgcs2f7xer5mv" path="res://Assets/dyingfish.png" id="1_ttdw0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n7i2"]
+atlas = ExtResource("1_ttdw0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vscid"]
+atlas = ExtResource("1_ttdw0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1hcua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n7i2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vscid")
+}],
+"loop": true,
+"name": &"flop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vcqva"]
+radius = 28.8617
+
+[node name="DyingFish" type="Node2D"]
+top_level = true
+script = ExtResource("1_svc5y")
+
+[node name="DraggableNode" type="RigidBody2D" parent="."]
+scale = Vector2(1, 1.00772)
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+
+[node name="sprite" type="AnimatedSprite2D" parent="DraggableNode"]
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_1hcua")
+animation = &"flop"
+frame_progress = 0.925774
+
+[node name="HealthMissing" type="ColorRect" parent="DraggableNode/sprite"]
+offset_left = -21.0
+offset_top = -34.0
+offset_right = 19.0
+offset_bottom = -28.0
+color = Color(0.988235, 0, 0.258824, 1)
+
+[node name="Health" type="ColorRect" parent="DraggableNode/sprite"]
+offset_left = -21.0
+offset_top = -34.0
+offset_right = 19.0
+offset_bottom = -28.0
+color = Color(0, 0.647059, 0.12549, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableNode"]
+position = Vector2(29, 30)
+shape = SubResource("CircleShape2D_vcqva")
+
+[node name="Draggable" type="TextureRect" parent="DraggableNode"]
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_default_cursor_shape = 6
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("1_mdf8m")
+
+[connection signal="game_over" from="." to="." method="_on_game_over"]
+[connection signal="input_event" from="DraggableNode" to="." method="_on_draggable_node_input_event"]
+[connection signal="mouse_entered" from="DraggableNode" to="DraggableNode" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="DraggableNode" to="DraggableNode" method="_on_mouse_exited"]

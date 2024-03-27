@@ -1,0 +1,336 @@
+[gd_scene load_steps=42 format=3 uid="uid://bconxyjqxc4bi"]
+
+[ext_resource type="Texture2D" uid="uid://dbxi7y6k8fgp4" path="res://Assets/bg.png" id="1_ia35m"]
+[ext_resource type="Texture2D" uid="uid://c5peq57qddu7s" path="res://Assets/tank.png" id="1_ubrex"]
+[ext_resource type="Script" path="res://game.gd" id="1_vnsgo"]
+[ext_resource type="Texture2D" uid="uid://bu3y67su2m5ob" path="res://Assets/fish1.png" id="2_u728g"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_2yfn5"]
+[ext_resource type="Script" path="res://YellowFish.gd" id="3_7tlin"]
+[ext_resource type="Texture2D" uid="uid://bwidguhq87dji" path="res://Assets/fish2.png" id="4_2c08o"]
+[ext_resource type="Texture2D" uid="uid://d3ungg2iti250" path="res://Assets/fish3.png" id="5_s7lsx"]
+[ext_resource type="Script" path="res://DropArea.gd" id="9_ya3qa"]
+[ext_resource type="Texture2D" uid="uid://bts7pqm06qg6m" path="res://white.png" id="10_1ovyk"]
+[ext_resource type="Texture2D" uid="uid://cm6sn8uamy54b" path="res://Assets/brown.png" id="10_22eaq"]
+[ext_resource type="Script" path="res://SpawnManager.gd" id="11_fjhr6"]
+[ext_resource type="AudioStream" uid="uid://b0fbj662gec0r" path="res://Assets/Sounds/jump.mp3" id="12_dinx6"]
+[ext_resource type="AudioStream" uid="uid://pxfeh5i8un7f" path="res://Assets/Sounds/plop.mp3" id="13_l0plu"]
+[ext_resource type="Script" path="res://Score.gd" id="14_dpntp"]
+[ext_resource type="AudioStream" uid="uid://bnyi32bp02edk" path="res://Assets/Sounds/background.mp3" id="16_diubu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3oq4"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(0, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28q4p"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(800, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vve7i"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(1600, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5axsq"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(2400, 0, 800, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vk5bs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3oq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28q4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vve7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5axsq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4udyw"]
+size = Vector2(20, 392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlnun"]
+size = Vector2(20, 394.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fapu5"]
+size = Vector2(718, 33)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dry5y"]
+radius = 10.8725
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv772"]
+atlas = ExtResource("2_u728g")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbmyr"]
+atlas = ExtResource("2_u728g")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dgd5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv772")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbmyr")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_yoc3m"]
+script/source = "extends Fish
+
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npxxl"]
+atlas = ExtResource("4_2c08o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lunxt"]
+atlas = ExtResource("4_2c08o")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnq56"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npxxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lunxt")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_pwop0"]
+script/source = "extends Fish
+
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj44b"]
+atlas = ExtResource("5_s7lsx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ib3a"]
+atlas = ExtResource("5_s7lsx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_avxht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj44b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ib3a")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f278s"]
+bg_color = Color(1, 0.309804, 0.478431, 0.411765)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w7qi"]
+size = Vector2(36.6786, 17.6713)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7el38"]
+size = Vector2(4.61684, 752.704)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d1kc6"]
+font_size = 64
+font_color = Color(1, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dyayg"]
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_vnsgo")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(558, 311)
+scale = Vector2(-6921.38, -3055.27)
+texture = ExtResource("1_ia35m")
+
+[node name="Tank" type="StaticBody2D" parent="."]
+position = Vector2(561, 304)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Tank"]
+sprite_frames = SubResource("SpriteFrames_vk5bs")
+frame_progress = 0.218746
+script = ExtResource("3_2yfn5")
+
+[node name="Left" type="CollisionShape2D" parent="Tank"]
+position = Vector2(-350, 7)
+shape = SubResource("RectangleShape2D_4udyw")
+
+[node name="Right" type="CollisionShape2D" parent="Tank"]
+position = Vector2(348, 9)
+shape = SubResource("RectangleShape2D_wlnun")
+
+[node name="Bottom" type="CollisionShape2D" parent="Tank"]
+position = Vector2(-1, 221.5)
+shape = SubResource("RectangleShape2D_fapu5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(572, 325)
+zoom = Vector2(0.75, 0.75)
+
+[node name="YellowFish" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(611, 289)
+script = ExtResource("3_7tlin")
+sprite = NodePath("YellowFishSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YellowFish"]
+rotation = -3.14159
+scale = Vector2(2.11957, -2.45863)
+shape = SubResource("CircleShape2D_dry5y")
+
+[node name="YellowFishSprite" type="AnimatedSprite2D" parent="YellowFish"]
+scale = Vector2(0.87, 1)
+sprite_frames = SubResource("SpriteFrames_3dgd5")
+animation = &"swim"
+frame_progress = 0.57122
+
+[node name="RedFish" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(449, 403)
+script = SubResource("GDScript_yoc3m")
+sprite = NodePath("RedFishSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RedFish"]
+rotation = -3.14159
+scale = Vector2(2.11957, -2.45863)
+shape = SubResource("CircleShape2D_dry5y")
+
+[node name="RedFishSprite" type="AnimatedSprite2D" parent="RedFish"]
+scale = Vector2(0.87, 1)
+sprite_frames = SubResource("SpriteFrames_lnq56")
+animation = &"swim"
+
+[node name="WhiteFish" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(829, 465)
+script = SubResource("GDScript_pwop0")
+sprite = NodePath("WhiteFishSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WhiteFish"]
+rotation = -3.14159
+scale = Vector2(2.11957, -2.45863)
+shape = SubResource("CircleShape2D_dry5y")
+
+[node name="WhiteFishSprite" type="AnimatedSprite2D" parent="WhiteFish"]
+scale = Vector2(0.87, 1)
+sprite_frames = SubResource("SpriteFrames_avxht")
+animation = &"swim"
+
+[node name="DropArea" type="TextureRect" parent="."]
+offset_left = 223.0
+offset_top = 65.0
+offset_right = 263.0
+offset_bottom = 105.0
+scale = Vector2(16.8775, 2.71124)
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("9_ya3qa")
+
+[node name="Panel" type="Panel" parent="DropArea"]
+visible = false
+show_behind_parent = true
+layout_mode = 0
+offset_left = -0.118501
+offset_top = -1.47534
+offset_right = 39.8815
+offset_bottom = 38.5247
+scale = Vector2(1.00332, 1.26403)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f278s")
+
+[node name="Table" type="StaticBody2D" parent="."]
+scale = Vector2(7.8021, 0.996359)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Table"]
+position = Vector2(73.3137, 665.423)
+scale = Vector2(6.1446, -5.84994)
+texture = ExtResource("10_22eaq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2(73.3136, 709.081)
+scale = Vector2(5.36744, -5.84994)
+shape = SubResource("RectangleShape2D_7w7qi")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(0, -183)
+scale = Vector2(7.8021, 0.996359)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+position = Vector2(-27.3003, 472.721)
+scale = Vector2(0.128276, -17.9171)
+texture = ExtResource("10_1ovyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-27.558, 565.076)
+shape = SubResource("RectangleShape2D_7el38")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(1572, -185)
+scale = Vector2(7.8021, 0.996359)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+position = Vector2(-27.3003, 472.721)
+scale = Vector2(0.128276, -17.9171)
+texture = ExtResource("10_1ovyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(-27.558, 565.076)
+shape = SubResource("RectangleShape2D_7el38")
+
+[node name="SpawnManager" type="Node" parent="."]
+script = ExtResource("11_fjhr6")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dinx6")
+
+[node name="PlopSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_l0plu")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 548.0
+offset_top = -44.0
+offset_right = 588.0
+offset_bottom = 44.0
+text = "0"
+label_settings = SubResource("LabelSettings_d1kc6")
+script = ExtResource("14_dpntp")
+
+[node name="Round" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1222.0
+offset_top = -105.0
+offset_right = 1339.0
+offset_bottom = -72.0
+grow_horizontal = 0
+text = "Round: 1"
+label_settings = SubResource("LabelSettings_dyayg")
+script = ExtResource("14_dpntp")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_diubu")

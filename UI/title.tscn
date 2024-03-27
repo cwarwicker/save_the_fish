@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpv28lb2rq6jr"]
+
+[sub_resource type="SystemFont" id="SystemFont_sfsbl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_im5qv"]
+font = SubResource("SystemFont_sfsbl")
+font_size = 32
+
+[node name="Title" type="Label"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.5
+offset_top = 123.0
+offset_right = 45.5
+offset_bottom = 146.0
+grow_horizontal = 2
+text = "SUICIDAL FISH"
+label_settings = SubResource("LabelSettings_im5qv")

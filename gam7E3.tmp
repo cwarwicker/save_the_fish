@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://bconxyjqxc4bi"]
+
+[ext_resource type="Texture2D" uid="uid://dbxi7y6k8fgp4" path="res://Assets/bg.png" id="1_ia35m"]
+[ext_resource type="Texture2D" uid="uid://c5peq57qddu7s" path="res://Assets/tank.png" id="1_ubrex"]
+[ext_resource type="Texture2D" uid="uid://bu3y67su2m5ob" path="res://Assets/fish1.png" id="2_u728g"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_2yfn5"]
+[ext_resource type="Script" path="res://YellowFish.gd" id="3_7tlin"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybrlh"]
+size = Vector2(671, 392)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3oq4"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(0, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28q4p"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(800, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vve7i"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(1600, 0, 800, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5axsq"]
+atlas = ExtResource("1_ubrex")
+region = Rect2(2400, 0, 800, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vk5bs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3oq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28q4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vve7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5axsq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dry5y"]
+radius = 10.8725
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv772"]
+atlas = ExtResource("2_u728g")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbmyr"]
+atlas = ExtResource("2_u728g")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dgd5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv772")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbmyr")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[node name="game" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(558, 311)
+scale = Vector2(-6921.38, -3055.27)
+texture = ExtResource("1_ia35m")
+
+[node name="Tank" type="StaticBody2D" parent="."]
+position = Vector2(561, 304)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tank"]
+position = Vector2(0.5, 9)
+shape = SubResource("RectangleShape2D_ybrlh")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Tank"]
+sprite_frames = SubResource("SpriteFrames_vk5bs")
+frame_progress = 0.218746
+script = ExtResource("3_2yfn5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(572, 325)
+zoom = Vector2(0.75, 0.75)
+
+[node name="YellowFish" type="RigidBody2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(681, 317)
+script = ExtResource("3_7tlin")
+sprite = NodePath("YellowFishSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YellowFish"]
+scale = Vector2(-2.11957, 2.45863)
+shape = SubResource("CircleShape2D_dry5y")
+
+[node name="YellowFishSprite" type="AnimatedSprite2D" parent="YellowFish"]
+scale = Vector2(0.87, 1)
+sprite_frames = SubResource("SpriteFrames_3dgd5")
+animation = &"swim"
+frame_progress = 0.57122

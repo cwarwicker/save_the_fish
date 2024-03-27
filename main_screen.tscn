@@ -1,0 +1,117 @@
+[gd_scene load_steps=15 format=3 uid="uid://dx8b60h04ysor"]
+
+[ext_resource type="Texture2D" uid="uid://dbxi7y6k8fgp4" path="res://Assets/bg.png" id="1_hs2gq"]
+[ext_resource type="PackedScene" uid="uid://bpv28lb2rq6jr" path="res://UI/title.tscn" id="2_bx8n6"]
+[ext_resource type="PackedScene" uid="uid://cewhxeyi8y7sq" path="res://UI/start_button.tscn" id="3_f4jj0"]
+[ext_resource type="Script" path="res://UI/start_button.gd" id="4_jmf21"]
+[ext_resource type="PackedScene" uid="uid://yxk8dt2s5fc5" path="res://UI/tutorial_button.tscn" id="4_y8eur"]
+[ext_resource type="PackedScene" uid="uid://cm7oa6ysur8xw" path="res://UI/exit_button.tscn" id="5_efdr3"]
+[ext_resource type="Script" path="res://UI/tutorial_button.gd" id="7_mqs5m"]
+[ext_resource type="Script" path="res://UI/exit_button.gd" id="8_mn1py"]
+[ext_resource type="Script" path="res://YellowFish.gd" id="9_gsg0v"]
+[ext_resource type="Texture2D" uid="uid://bu3y67su2m5ob" path="res://Assets/fish1.png" id="9_nrdxa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g3lb8"]
+radius = 10.8725
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv772"]
+atlas = ExtResource("9_nrdxa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbmyr"]
+atlas = ExtResource("9_nrdxa")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hi3x2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv772")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbmyr")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}]
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hs2gq")
+stretch_mode = 1
+
+[node name="Title" parent="." instance=ExtResource("2_bx8n6")]
+layout_mode = 1
+anchors_preset = 8
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -202.0
+offset_right = 59.0
+offset_bottom = -179.0
+grow_vertical = 2
+text = "SAVE THE FISH"
+label_settings = null
+horizontal_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -93.0
+offset_right = 70.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" parent="Menu" instance=ExtResource("3_f4jj0")]
+layout_mode = 2
+script = ExtResource("4_jmf21")
+
+[node name="TutorialButton" parent="Menu" instance=ExtResource("4_y8eur")]
+layout_mode = 2
+script = ExtResource("7_mqs5m")
+
+[node name="ExitButton" parent="Menu" instance=ExtResource("5_efdr3")]
+layout_mode = 2
+script = ExtResource("8_mn1py")
+
+[node name="YellowFish" type="CharacterBody2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(579, 186)
+script = ExtResource("9_gsg0v")
+sprite = NodePath("YellowFishSprite")
+can_move = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YellowFish"]
+rotation = -3.14159
+scale = Vector2(2.11957, -2.45863)
+shape = SubResource("CircleShape2D_g3lb8")
+
+[node name="YellowFishSprite" type="AnimatedSprite2D" parent="YellowFish"]
+position = Vector2(0, -1)
+scale = Vector2(0.87, 1)
+sprite_frames = SubResource("SpriteFrames_hi3x2")
+animation = &"swim"
+
+[connection signal="pressed" from="Menu/StartButton" to="Menu/StartButton" method="_on_pressed"]
+[connection signal="pressed" from="Menu/TutorialButton" to="Menu/TutorialButton" method="_on_pressed"]
+[connection signal="pressed" from="Menu/ExitButton" to="Menu/StartButton" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Menu/ExitButton" to="Menu/ExitButton" method="_on_pressed"]

@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4rnjhfxs2ccf"]
+
+[ext_resource type="Texture2D" uid="uid://dbxi7y6k8fgp4" path="res://Assets/bg.png" id="1_8vdba"]
+[ext_resource type="PackedScene" uid="uid://cewhxeyi8y7sq" path="res://UI/start_button.tscn" id="2_5fp1x"]
+[ext_resource type="PackedScene" uid="uid://cm7oa6ysur8xw" path="res://UI/exit_button.tscn" id="2_7opmf"]
+[ext_resource type="Script" path="res://FinalScoreLabel.gd" id="2_p0reg"]
+[ext_resource type="Script" path="res://UI/exit_button.gd" id="3_318pt"]
+[ext_resource type="Script" path="res://UI/start_button.gd" id="3_a7jxi"]
+[ext_resource type="PackedScene" uid="uid://bconxyjqxc4bi" path="res://game.tscn" id="4_cimc0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jcb48"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_dk62p"]
+font_size = 36
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8vdba")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -143.0
+offset_top = 36.0
+offset_right = 143.0
+offset_bottom = 249.0
+grow_horizontal = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_jcb48")
+
+[node name="FinalScoreLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -152.0
+offset_right = 105.5
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Final Score
+<score>"
+label_settings = SubResource("LabelSettings_dk62p")
+horizontal_alignment = 1
+script = ExtResource("2_p0reg")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -35.0
+offset_right = 70.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" parent="Menu" instance=ExtResource("2_5fp1x")]
+layout_mode = 2
+text = "RESTART"
+script = ExtResource("3_a7jxi")
+next_scene = ExtResource("4_cimc0")
+
+[node name="ExitButton" parent="Menu" instance=ExtResource("2_7opmf")]
+layout_mode = 2
+script = ExtResource("3_318pt")
+
+[connection signal="pressed" from="Menu/StartButton" to="Menu/StartButton" method="_on_pressed"]
+[connection signal="pressed" from="Menu/ExitButton" to="Menu/StartButton" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Menu/ExitButton" to="Menu/ExitButton" method="_on_pressed"]

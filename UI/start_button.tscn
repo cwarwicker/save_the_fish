@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cewhxeyi8y7sq"]
+
+[node name="StartButton" type="Button"]
+size_flags_vertical = 3
+text = "START"

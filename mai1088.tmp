@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx8b60h04ysor"]
+
+[ext_resource type="Texture2D" uid="uid://dbxi7y6k8fgp4" path="res://Assets/bg.png" id="1_hs2gq"]
+[ext_resource type="PackedScene" uid="uid://bpv28lb2rq6jr" path="res://UI/title.tscn" id="2_bx8n6"]
+[ext_resource type="PackedScene" uid="uid://cewhxeyi8y7sq" path="res://UI/start_button.tscn" id="3_f4jj0"]
+[ext_resource type="Script" path="res://UI/start_button.gd" id="4_jmf21"]
+[ext_resource type="PackedScene" uid="uid://yxk8dt2s5fc5" path="res://UI/tutorial_button.tscn" id="4_y8eur"]
+[ext_resource type="PackedScene" uid="uid://bconxyjqxc4bi" path="res://game.tscn" id="5_7glt7"]
+[ext_resource type="PackedScene" uid="uid://cm7oa6ysur8xw" path="res://UI/exit_button.tscn" id="5_efdr3"]
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hs2gq")
+stretch_mode = 1
+
+[node name="Title" parent="." instance=ExtResource("2_bx8n6")]
+layout_mode = 1
+offset_left = -55.0
+offset_top = 113.0
+offset_right = 55.0
+offset_bottom = 136.0
+label_settings = null
+horizontal_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -93.0
+offset_right = 70.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" parent="Menu" instance=ExtResource("3_f4jj0")]
+layout_mode = 2
+script = ExtResource("4_jmf21")
+game_scene = ExtResource("5_7glt7")
+
+[node name="TutorialButton" parent="Menu" instance=ExtResource("4_y8eur")]
+layout_mode = 2
+
+[node name="ExitButton" parent="Menu" instance=ExtResource("5_efdr3")]
+layout_mode = 2
+
+[connection signal="pressed" from="Menu/StartButton" to="Menu/StartButton" method="_on_pressed"]

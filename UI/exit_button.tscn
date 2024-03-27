@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cm7oa6ysur8xw"]
+
+[node name="ExitButton" type="Button"]
+size_flags_vertical = 3
+text = "EXIT"
